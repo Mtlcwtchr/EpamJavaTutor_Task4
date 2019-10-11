@@ -60,10 +60,10 @@ public class Port {
                         System.out.println("Port congestion: "+cargoes);
                             Iterator iterator = ships.iterator();
                                 while (iterator.hasNext()){
-                                    Ship ship = (Ship) iterator.next();
-                                    if(((ship.state==1))&&Port.cargoes>0){
-                                        synchronized (ship){
-                                            ship.notify();
+                                    Ship cship = (Ship) iterator.next();
+                                    if(((cship.state==1))&& cship.loader!=null && Port.cargoes>0){
+                                        synchronized (cship.loader){
+                                            cship.loader.notify();
                                         }
                                     }
                                 }
